@@ -1,0 +1,106 @@
+
+wrangler kv:namespace create REFRESH_TOKEN --preview
+
+curl -v 'http://localhost:8787/favicon.ico' \
+  -H 'accept: */*' \
+  -H 'user-agent: Mozilla' 
+
+curl -v 'http://localhost:8787/user/sssa?auth_token=test' \
+  -H 'accept: */*' \
+  -H 'content-type: application/json' \
+  -H 'user-agent: Mozilla' \
+  --data-raw '{"value":["2023-01-31T17:00:00.000Z","2023-02-28T16:59:59.999Z"]}' \
+  --compressed | json_pp
+
+curl -v -X GET 'http://localhost:8787/user/sssa?auth_token=test' \
+  -H 'accept: */*' \
+  -H 'content-type: application/json' \
+  -H 'user-agent: Mozilla'
+
+
+curl -v -X GET 'http://localhost:8787/zzz/sssa?auth_token=test' \
+  -H 'accept: */*' \
+  -H 'content-type: application/json' \
+  -H 'user-agent: Mozilla'
+
+
+curl -v -X GET 'http://localhost:8787/zzz/sssa?auth_token=test&x[]=3&x[]=34' \
+  -H 'accept: */*' \
+  -H 'content-type: application/json' \
+  -H 'user-agent: Mozilla'
+
+
+curl -v -X GET 'http://localhost:8787/?auth_token=test' \
+  -H 'accept: */*' \
+  -H 'content-type: application/json' \
+  -H 'user-agent: Mozilla'
+
+curl -v -X GET 'http://localhost:8787/404?auth_token=test' \
+  -H 'accept: */*' \
+  -H 'content-type: application/json' \
+  -H 'user-agent: Mozilla'
+
+curl -v -X POST 'http://localhost:8787/?auth_token=test' \
+  -H 'accept: */*' \
+  -H 'content-type: application/json' \
+  -H 'user-agent: Mozilla' \
+  --data-raw '{"value":["2023-01-31T17:00:00.000Z","2023-02-28T16:59:59.999Z"]}'
+
+curl -v 'http://localhost:8787/?auth_token=test' \
+  -H 'accept: */*' \
+  -H 'content-type: application/json' \
+  -H 'user-agent: Mozilla' \
+  --data-raw '{"value":["2023-01-31T17:00:00.000Z","2023-02-28T16:59:59.999Z"]}'
+
+curl -v -X POST 'http://localhost:8787/?auth_token=test' \
+  -H 'user-agent: Mozilla' \
+  -H 'Content-Type: application/json' \
+  -d '{"value":"my_login","key":"my_password", "expiration":"2023-04-28T16:59:59.999Z"}'
+
+curl -v -X POST 'http://localhost:8787/?auth_token=test' \
+  -H 'user-agent: Mozilla' \
+  -H 'Content-Type: application/json' \
+  -d '{"value":"my_login","key":"meta", "metadata":{"x":3333,"test":"sample"}, "expiration":"2023-04-28T16:59:59.999Z"}'
+
+curl -v 'http://localhost:8787/meta?meta=true' \
+  -H 'accept: */*' \
+  -H 'content-type: application/json' \
+  -H 'user-agent: Mozilla'
+
+curl -v -X POST 'http://localhost:8787/zczczc:tttt?auth_token=test' \
+  -H 'authorization: Bearer test' \
+  -H 'user-agent: Mozilla' \
+  -H 'Content-Type: application/json' \
+  -d '{"value":"my_login","key":"", "metadata":{"x":3333,"test":"sample"}, "expiration":"2023-04-28T16:59:59.999Z"}'
+
+curl -v -X GET 'http://localhost:8787/meta:test?meta=true&auth_token=test' \
+  -H 'accept: */*' \
+  -H 'user-agent: Mozilla' \
+  -H 'Content-Type: application/json'
+
+curl -v -X GET 'http://localhost:8787/meta:test44?meta=true&auth_token=test' \
+  -H 'accept: */*' \
+  -H 'user-agent: Mozilla' \
+  -H 'Content-Type: application/json'
+
+curl -v -X GET 'http://localhost:8787/user:lllll?meta=true&auth_token=test' \
+  -H 'accept: */*' \
+  -H 'user-agent: Mozilla' \
+  -H 'Content-Type: application/json'
+
+curl -v -X GET 'http://localhost:8787/zczczc:tttt?meta=true&auth_token=test' \
+  -H 'accept: */*' \
+  -H 'user-agent: Mozilla' \
+  -H 'Content-Type: application/json'
+
+
+curl -v 'http://localhost:8787/?auth_token=test' \
+  -H 'accept: */*' \
+  -H 'content-type: application/json' \
+  -H 'user-agent: Mozilla' \
+  --data-raw '{"key": "c:trtrt", "value":{"sample":8888,"aaa":"test"},"expiration": "2023-04-14T11:35:26+07:00"}'
+
+curl -v -X GET 'http://localhost:8787/c:trtrt?auth_token=test' \
+  -H 'authorization: Bearer test' \
+  -H 'accept: */*' \
+  -H 'user-agent: Mozilla'

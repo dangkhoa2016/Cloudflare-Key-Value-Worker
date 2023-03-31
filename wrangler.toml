@@ -1,0 +1,26 @@
+name = 'key-value-server'
+compatibility_date = '2023-03-23'
+main = './index.js'
+node_compat = true
+usage_model = 'bundled'
+
+kv_namespaces= [
+  { binding = 'REFRESH_TOKEN', id = 'ee', preview_id = 'ee' },
+  { binding = 'BLOCKED_IPS', id = 'ff', preview_id = 'ff' }
+]
+
+[vars]
+MASTER_KEY = 'dd'
+CONTENT_SECRET = 'cc'
+
+
+
+[env.production]
+name = 'key-value-server'
+kv_namespaces = [
+  { binding = 'REFRESH_TOKEN', id = 'xx' },
+  { binding = 'BLOCKED_IPS', id = 'yy' },
+]
+[env.production.vars]
+MASTER_KEY = 'aa'
+CONTENT_SECRET = 'bb'
